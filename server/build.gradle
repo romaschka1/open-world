@@ -1,0 +1,42 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.5'
+	id 'io.spring.dependency-management' version '1.1.6'
+	id "io.freefair.lombok" version "8.10"
+}
+
+group = 'romashka'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(23)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation "com.coveo:spring-boot-parameter-store-integration:1.1.2"
+	implementation "org.mapstruct:mapstruct:1.4.2.Final"
+	annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
+
+	implementation "org.mariadb.jdbc:mariadb-java-client:3.1.0"
+
+	implementation "com.zaxxer:HikariCP"
+
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+
+	implementation ("org.springframework.boot:spring-boot-starter-web")
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
