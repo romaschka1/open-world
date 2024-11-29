@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import romashka.openworld.domain.UserLocation;
 
 public interface UserLocationRepository extends JpaRepository<UserLocation, Long>, JpaSpecificationExecutor<UserLocation> {
+    UserLocation findTopByOrderByIdDesc();
 }

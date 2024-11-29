@@ -21,7 +21,7 @@ public class LocationResource {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<UserLocationDTO>> getUserLocation () {
+    public ResponseEntity<List<List<UserLocationDTO>>> getUserLocation () {
         return ResponseEntity.ok().body(userLocationService.getUserLocations());
     }
 }

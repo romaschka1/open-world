@@ -12,6 +12,8 @@
 		D53BFD562C866287005CC731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D53BFD552C866287005CC731 /* Assets.xcassets */; };
 		D53BFD592C866287005CC731 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D53BFD582C866287005CC731 /* Preview Assets.xcassets */; };
 		D5B3CB992CE6517E00E4E54D /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3CB982CE6517E00E4E54D /* LocationService.swift */; };
+		D5BD4F852CFA296400849906 /* UserLocationResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD4F842CFA296400849906 /* UserLocationResource.swift */; };
+		D5BD4F872CFA2C3200849906 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD4F862CFA2C3200849906 /* Constants.swift */; };
 		D5FA0B382CEA549A006F8962 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA0B372CEA549A006F8962 /* UserLocation.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,8 @@
 		D53BFD582C866287005CC731 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D53BFD682C866551005CC731 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D5B3CB982CE6517E00E4E54D /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		D5BD4F842CFA296400849906 /* UserLocationResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationResource.swift; sourceTree = "<group>"; };
+		D5BD4F862CFA2C3200849906 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D5FA0B372CEA549A006F8962 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,6 +60,10 @@
 		D53BFD502C866286005CC731 /* OpenWorld */ = {
 			isa = PBXGroup;
 			children = (
+				D5BD4F832CFA294000849906 /* Domain */,
+				D5BD4F822CFA284500849906 /* Utils */,
+				D5BD4F812CFA283700849906 /* Views */,
+				D5BD4F802CFA27C800849906 /* Controllers */,
 				D5B3CB972CE6516900E4E54D /* Services */,
 				D53BFD682C866551005CC731 /* Info.plist */,
 				D53BFD622C866303005CC731 /* Models */,
@@ -89,6 +97,36 @@
 				D5B3CB982CE6517E00E4E54D /* LocationService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		D5BD4F802CFA27C800849906 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D5BD4F812CFA283700849906 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D5BD4F822CFA284500849906 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D5BD4F862CFA2C3200849906 /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		D5BD4F832CFA294000849906 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D5BD4F842CFA296400849906 /* UserLocationResource.swift */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +203,8 @@
 				D53BFD522C866286005CC731 /* OpenWorldApp.swift in Sources */,
 				D5B3CB992CE6517E00E4E54D /* LocationService.swift in Sources */,
 				D5FA0B382CEA549A006F8962 /* UserLocation.swift in Sources */,
+				D5BD4F852CFA296400849906 /* UserLocationResource.swift in Sources */,
+				D5BD4F872CFA2C3200849906 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

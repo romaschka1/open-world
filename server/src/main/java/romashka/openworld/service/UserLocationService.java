@@ -10,6 +10,7 @@ import romashka.openworld.service.mapper.UserLocationMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -20,9 +21,18 @@ public class UserLocationService {
     private final UserLocationMapper userLocationMapper;
 
     public List<UserLocationDTO> updateUserLocations(List<UserLocationDTO> locations) {
-        List<UserLocationDTO> result = new ArrayList<UserLocationDTO>();
+        UserLocation lastEntry = userLocationRepository.findTopByOrderByIdDesc();
+        long newGroupId = 0L;
+
+        if (lastEntry != null) {
+            newGroupId = lastEntry.getGroupId() + 1L;
+        }
+
+        List<UserLocationDTO> result = new ArrayList<>();
 
         for (UserLocationDTO location : locations) {
+            location.setGroupId(newGroupId);
+
             var saveResult = userLocationRepository.save(userLocationMapper.toEntity(location));
             result.add(userLocationMapper.toDto(saveResult));
         }
@@ -30,9 +40,15 @@ public class UserLocationService {
         return result;
     }
 
-    public List<UserLocationDTO> getUserLocations() {
+    public List<List<UserLocationDTO>> getUserLocations() {
         List<UserLocation> locations = userLocationRepository.findAll();
 
-        return userLocationMapper.toDto(locations);
+        // Each item in list is a representation of one line on canvas
+        return locations.stream()
+            .collect(Collectors.groupingBy(UserLocation::getGroupId))
+            .values()
+            .stream()
+            .map(userLocationMapper::toDto)
+            .toList();
     }
 }

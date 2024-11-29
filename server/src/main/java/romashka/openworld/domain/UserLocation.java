@@ -2,8 +2,10 @@ package romashka.openworld.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity
@@ -16,11 +18,14 @@ public class UserLocation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "group_id", nullable = false)
+    private  Long groupId;
+
     @Column(name = "latitude", nullable = false)
-    private Long latitude;
+    private BigDecimal latitude;
 
     @Column(name = "longitude", nullable = false)
-    private Long longitude;
+    private BigDecimal longitude;
 
     @Column(name = "time", nullable = false)
     private Instant time;

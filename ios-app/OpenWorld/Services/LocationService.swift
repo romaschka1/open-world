@@ -8,8 +8,10 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager: CLLocationManager!
     private var userLocations: [UserLocation] = []
     private var timer: Timer?
+    private let userLocationResource: UserLocationResource
 
-    override init() {
+    init(userLocationResource: UserLocationResource = UserLocationResource()) {
+        self.userLocationResource = userLocationResource
         self.locationManager = CLLocationManager()
         super.init()
 
@@ -31,14 +33,13 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         )
     }
 
-    // CLLocationManager delegate method
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let newLocation = locations.last else { return }
         
         let userLocation = UserLocation.init(
             time: ISO8601DateFormatter().string(from: Date()),
-            latitude: Int64(newLocation.coordinate.latitude * 1_000_000),
-            longitude: Int64(newLocation.coordinate.longitude * 1_000_000)
+            latitude: newLocation.coordinate.latitude,
+            longitude: newLocation.coordinate.longitude
         )
 
         userLocations.append(userLocation);
@@ -46,8 +47,8 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     @objc func sendLocationToServer() {
         guard !userLocations.isEmpty else { return }
-
-        sendCoordinatesToServer(userLocations) { success in
+        
+        userLocationResource.sendLocations(userLocations) { success in
             if success {
                 print("Coordinates sent successfully")
                 self.userLocations.removeAll()
@@ -57,42 +58,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
 
-    private func sendCoordinatesToServer(_ locations: [UserLocation], completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: API_URL) else {
-            completion(false)
-            return
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            let jsonData = try JSONEncoder().encode(locations)
-            request.httpBody = jsonData
-        } catch {
-            completion(false)
-            return
-        }
-
-        let task = URLSession.shared.dataTask(with: request) { _, response, error in
-            if let error = error {
-                print("Error sending coordinates: \(error)")
-                completion(false)
-                return
-            }
-
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-        
-        task.resume()
-    }
-
-    public func getCoordinatesFromServer(completion: @escaping ([UserLocation]) -> Void) {
+    public func getCoordinatesFromServer(completion: @escaping ([[UserLocation]]) -> Void) {
         guard let url = URL(string: API_URL) else {
            print("Invalid URL")
            return
@@ -111,12 +77,9 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
            
            do {
                let decoder = JSONDecoder()
-               let locations = try decoder.decode([UserLocation].self, from: data)
-               
-               DispatchQueue.global().asyncAfter(deadline: .now()) {
-                   completion(locations)
-               }
-      
+               let locations = try decoder.decode([[UserLocation]].self, from: data)
+
+               completion(locations)
            } catch {
                print("Error decoding JSON: \(error)")
            }

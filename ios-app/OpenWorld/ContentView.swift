@@ -19,7 +19,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     private var sendButton: UIButton!
     private var loadButton: UIButton!
+    
+    private let userLocationResource: UserLocationResource
 
+    init(userLocationResource: UserLocationResource = UserLocationResource()) {
+        self.userLocationResource = userLocationResource
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -65,23 +76,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     @objc private func loadLocationButtonPressed() {
-        locationService.getCoordinatesFromServer { data in
-           DispatchQueue.main.async {
-               for item in data {
-                   let coordinates = data.map { location in
-                       CLLocationCoordinate2D(
-                           latitude: Double(location.latitude) / 1_000_000,
-                           longitude: Double(location.longitude) / 1_000_000
-                       )
-                   }
-                      
-                   let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
-                   self.mapView.addOverlay(polyline)
-               }
-           }
+        self.userLocationResource.getLocations { data in
+            for group in data {
+                let coordinates = group.map { location in
+                    CLLocationCoordinate2D(
+                        latitude: location.latitude,
+                        longitude: location.longitude
+                    )
+                }
+
+                self.drawPath(data: coordinates)
+            }
         }
     }
-    
+
     private func setupSendButton() {
         sendButton = UIButton(type: .system)
         sendButton.setTitle("Send", for: .normal)
@@ -110,11 +118,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let newLocation = locations.last else { return }
         newUserLocations.append(newLocation.coordinate)
-        drawPath()
+        drawPath(data: newUserLocations)
     }
 
-    func drawPath() {
-        let polyline = MKPolyline(coordinates: newUserLocations, count: newUserLocations.count)
+    func drawPath(data: [CLLocationCoordinate2D]) {
+        let polyline = MKPolyline(coordinates: data, count: data.count)
         mapView.addOverlay(polyline)
     }
 

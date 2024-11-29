@@ -9,6 +9,7 @@ import Foundation
 
 struct UserLocation: Codable {
     let time: String  // ISO 8601 formatted date
-    let latitude: Int64
-    let longitude: Int64
+    let latitude: Double
+    let longitude: Double
 }
+
