@@ -1,0 +1,20 @@
+{
+  "source": "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Views/LoginView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Crete a new user"
+      },
+      {
+        "comment": "",
+        "key": "Username"
+      },
+      {
+        "comment": "",
+        "key": "Login"
+      }
+    ]
+  },
+  "version": 1
+}

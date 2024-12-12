@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct OpenWorldApp: App {
+    @AppStorage("isLoggedIn") private var isLoggedIn = false
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            if isLoggedIn {
+                MapRepresentable()
+                    .edgesIgnoringSafeArea(.all)
+//            } else {
+//                LoginView()
+//            }
         }
     }
 }

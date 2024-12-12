@@ -1,0 +1,98 @@
+{
+  "" : {
+    "diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorld-master.dia",
+    "emit-module-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorld-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorld-master-emit-module.dia",
+    "swift-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorld-master.swiftdeps"
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Models/User.swift" : {
+    "const-values" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/User.swiftconstvalues",
+    "dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/User.d",
+    "diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/User.dia",
+    "index-unit-output-path" : "/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/User.o",
+    "llvm-bc" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/User.bc",
+    "object" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/User.o",
+    "swift-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/User.swiftdeps",
+    "swiftmodule" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/User~partial.swiftmodule"
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Models/UserLocation.swift" : {
+    "const-values" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocation.swiftconstvalues",
+    "dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocation.d",
+    "diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocation.dia",
+    "index-unit-output-path" : "/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocation.o",
+    "llvm-bc" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocation.bc",
+    "object" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocation.o",
+    "swift-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocation.swiftdeps",
+    "swiftmodule" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocation~partial.swiftmodule"
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/OpenWorldApp.swift" : {
+    "const-values" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorldApp.swiftconstvalues",
+    "dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorldApp.d",
+    "diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorldApp.dia",
+    "index-unit-output-path" : "/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorldApp.o",
+    "llvm-bc" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorldApp.bc",
+    "object" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorldApp.o",
+    "swift-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorldApp.swiftdeps",
+    "swiftmodule" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/OpenWorldApp~partial.swiftmodule"
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Resources/AuthorizationResource.swift" : {
+    "const-values" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/AuthorizationResource.swiftconstvalues",
+    "dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/AuthorizationResource.d",
+    "diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/AuthorizationResource.dia",
+    "index-unit-output-path" : "/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/AuthorizationResource.o",
+    "llvm-bc" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/AuthorizationResource.bc",
+    "object" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/AuthorizationResource.o",
+    "swift-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/AuthorizationResource.swiftdeps",
+    "swiftmodule" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/AuthorizationResource~partial.swiftmodule"
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Resources/UserLocationResource.swift" : {
+    "const-values" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocationResource.swiftconstvalues",
+    "dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocationResource.d",
+    "diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocationResource.dia",
+    "index-unit-output-path" : "/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocationResource.o",
+    "llvm-bc" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocationResource.bc",
+    "object" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocationResource.o",
+    "swift-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocationResource.swiftdeps",
+    "swiftmodule" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/UserLocationResource~partial.swiftmodule"
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Utils/Constants.swift" : {
+    "const-values" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/Constants.swiftconstvalues",
+    "dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/Constants.d",
+    "diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/Constants.dia",
+    "index-unit-output-path" : "/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/Constants.o",
+    "llvm-bc" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/Constants.bc",
+    "object" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/Constants.o",
+    "swift-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/Constants.swiftdeps",
+    "swiftmodule" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/Constants~partial.swiftmodule"
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Views/LoginView.swift" : {
+    "const-values" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/LoginView.swiftconstvalues",
+    "dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/LoginView.d",
+    "diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/LoginView.dia",
+    "index-unit-output-path" : "/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/LoginView.o",
+    "llvm-bc" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/LoginView.bc",
+    "object" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/LoginView.o",
+    "swift-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/LoginView.swiftdeps",
+    "swiftmodule" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/LoginView~partial.swiftmodule"
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Views/MapView.swift" : {
+    "const-values" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/MapView.swiftconstvalues",
+    "dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/MapView.d",
+    "diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/MapView.dia",
+    "index-unit-output-path" : "/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/MapView.o",
+    "llvm-bc" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/MapView.bc",
+    "object" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/MapView.o",
+    "swift-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/MapView.swiftdeps",
+    "swiftmodule" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Build/Intermediates.noindex/OpenWorld.build/Debug-iphonesimulator/OpenWorld.build/Objects-normal/arm64/MapView~partial.swiftmodule"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "" : {
+    "dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Index.noindex/Build/Intermediates.noindex/OpenWorld.build/Debug-iphoneos/OpenWorld.build/Objects-normal/arm64/OpenWorld-master.d",
+    "diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Index.noindex/Build/Intermediates.noindex/OpenWorld.build/Debug-iphoneos/OpenWorld.build/Objects-normal/arm64/OpenWorld-master.dia",
+    "emit-module-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Index.noindex/Build/Intermediates.noindex/OpenWorld.build/Debug-iphoneos/OpenWorld.build/Objects-normal/arm64/OpenWorld-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Index.noindex/Build/Intermediates.noindex/OpenWorld.build/Debug-iphoneos/OpenWorld.build/Objects-normal/arm64/OpenWorld-master-emit-module.dia",
+    "swift-dependencies" : "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Index.noindex/Build/Intermediates.noindex/OpenWorld.build/Debug-iphoneos/OpenWorld.build/Objects-normal/arm64/OpenWorld-master.swiftdeps"
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/DerivedData/OpenWorld/Index.noindex/Build/Intermediates.noindex/OpenWorld.build/Debug-iphoneos/OpenWorld.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/ContentView.swift" : {
+
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Models/Loction.swift" : {
+
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Models/User.swift" : {
+
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/OpenWorldApp.swift" : {
+
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Resources/AuthorizationResource.swift" : {
+
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Resources/UserLocationResource.swift" : {
+
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Utils/Constants.swift" : {
+
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Views/LoginView.swift" : {
+
+  },
+  "/Users/romaska/Desktop/own/open-world/ios-app/OpenWorld/Views/MapView.swift" : {
+
+  }
+}

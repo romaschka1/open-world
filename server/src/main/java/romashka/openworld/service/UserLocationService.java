@@ -43,7 +43,7 @@ public class UserLocationService {
     public List<List<UserLocationDTO>> getUserLocations() {
         List<UserLocation> locations = userLocationRepository.findAll();
 
-        // Each item in list is a representation of one line on canvas
+        // Each item in the list is a representation of one group on canvas
         return locations.stream()
             .collect(Collectors.groupingBy(UserLocation::getGroupId))
             .values()

@@ -1,8 +1,8 @@
 //
-//  UserLocation.swift
+//  Loction.swift
 //  OpenWorld
 //
-//  Created by romaska on 17.11.2024.
+//  Created by romaska on 04.12.2024.
 //
 
 import Foundation
@@ -12,4 +12,3 @@ struct UserLocation: Codable {
     let latitude: Double
     let longitude: Double
 }
-
