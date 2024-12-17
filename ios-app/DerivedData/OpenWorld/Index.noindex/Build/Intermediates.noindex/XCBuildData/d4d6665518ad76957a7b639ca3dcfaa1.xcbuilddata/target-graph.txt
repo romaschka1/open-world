@@ -1,3 +1,0 @@
-Target dependency graph (2 targets)
-Target 'OpenWorld' in project 'OpenWorld' (no dependencies)
-Target 'OpenWorld' in project 'OpenWorld' (no dependencies)
