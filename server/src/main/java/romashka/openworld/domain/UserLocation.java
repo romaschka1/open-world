@@ -29,4 +29,7 @@ public class UserLocation {
 
     @Column(name = "time", nullable = false)
     private Instant time;
+
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 }

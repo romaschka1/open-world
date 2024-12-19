@@ -7,11 +7,12 @@
 
 import Foundation
 
-class AuthResource {
+class AuthorizationResource {
+    
+    static let shared = AuthorizationResource()
 
-    func sendLocations(_ locations: [UserLocation], completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: API.baseURL + "location") else {
-            completion(false)
+    func login(_ payload: UserLoginPayload, completion: @escaping (User) -> Void) {
+        guard let url = URL(string: API.baseURL + "authorization/login") else {
             return
         }
 
@@ -20,18 +21,27 @@ class AuthResource {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
-            let jsonData = try JSONEncoder().encode(locations)
+            let jsonData = try JSONEncoder().encode(payload)
             request.httpBody = jsonData
         } catch {
-            completion(false)
             return
         }
 
-        let task = URLSession.shared.dataTask(with: request) { _, response, error in
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                completion(true)
-            } else {
-                completion(false)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error authorizing user: \(error)")
+                return
+            }
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+
+            do {
+                let user = try JSONDecoder().decode(User.self, from: data)
+                completion(user);
+            } catch {
+                print("Error decoding JSON: \(error)")
             }
         }
         

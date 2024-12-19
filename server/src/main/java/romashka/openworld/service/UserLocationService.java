@@ -3,10 +3,13 @@ package romashka.openworld.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import romashka.openworld.domain.User;
 import romashka.openworld.domain.UserLocation;
 import romashka.openworld.repository.UserLocationRepository;
+import romashka.openworld.repository.UserRepository;
 import romashka.openworld.service.dto.UserLocationDTO;
 import romashka.openworld.service.mapper.UserLocationMapper;
+import romashka.openworld.service.mapper.UserMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +23,9 @@ public class UserLocationService {
     private final UserLocationRepository userLocationRepository;
     private final UserLocationMapper userLocationMapper;
 
-    public List<UserLocationDTO> updateUserLocations(List<UserLocationDTO> locations) {
+    public List<UserLocationDTO> updateUserLocations(Long userId, List<UserLocationDTO> locations) {
         UserLocation lastEntry = userLocationRepository.findTopByOrderByIdDesc();
+
         long newGroupId = 0L;
 
         if (lastEntry != null) {
@@ -32,6 +36,7 @@ public class UserLocationService {
 
         for (UserLocationDTO location : locations) {
             location.setGroupId(newGroupId);
+            location.setUserId(userId);
 
             var saveResult = userLocationRepository.save(userLocationMapper.toEntity(location));
             result.add(userLocationMapper.toDto(saveResult));
@@ -40,8 +45,8 @@ public class UserLocationService {
         return result;
     }
 
-    public List<List<UserLocationDTO>> getUserLocations() {
-        List<UserLocation> locations = userLocationRepository.findAll();
+    public List<List<UserLocationDTO>> getUserLocations(Long userId) {
+        List<UserLocation> locations = userLocationRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException("No coordinates for selected user"));
 
         // Each item in the list is a representation of one group on canvas
         return locations.stream()

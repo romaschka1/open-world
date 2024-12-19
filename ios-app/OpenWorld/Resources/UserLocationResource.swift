@@ -9,7 +9,14 @@ import UIKit
 
 class UserLocationResource {
     func getLocations(completion: @escaping ([[UserLocation]]) -> Void) {
-        guard let url = URL(string: API.baseURL + "location") else { return }
+        guard var urlComponents = URLComponents(string: API.baseURL + "location") else { return }
+        guard let userId = getLoggedUser()?.id else { return }
+
+        urlComponents.queryItems = [
+            URLQueryItem(name: "userId", value: String(userId))
+        ]
+        
+        let url = urlComponents.url!
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -35,10 +42,12 @@ class UserLocationResource {
     }
     
     func sendLocations(_ locations: [UserLocation], completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: API.baseURL + "location") else {
-            completion(false)
-            return
-        }
+        guard var urlComponents = URLComponents(string: API.baseURL + "location") else { return }
+        guard let userId = getLoggedUser()?.id else { return }
+
+        urlComponents.queryItems = [URLQueryItem(name: "userId", value: String(userId))]
+    
+        let url = urlComponents.url!
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

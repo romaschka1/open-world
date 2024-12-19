@@ -13,6 +13,7 @@ import java.time.Instant;
 public class UserLocationDTO {
 
     private Long groupId;
+    private Long userId;
     private Instant time;
     private BigDecimal latitude;
     private BigDecimal longitude;

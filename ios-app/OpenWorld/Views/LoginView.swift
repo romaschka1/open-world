@@ -11,21 +11,26 @@ import Combine
 
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
-    @AppStorage("loggedInUser") private var loggedInUserData: String?
+
+    @AppStorage("loggedUser") private var loggedUserData: Data?
+    
+    @Binding var isLoggedIn: Bool
 
     var body: some View {
         VStack {
-            Text("Crete a new user")
+            Text("Login")
                 .font(.largeTitle)
                 .padding()
-
             TextField("Username", text: $viewModel.username)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-
+            SecureField("Password", text: $viewModel.password)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
             Button(action: {
-                viewModel.login { newUser in
-                    saveLoggedInUser(newUser)
+                viewModel.login { user in
+                    isLoggedIn = true;
+                    loggedUserData = encodeUser(user)
                 }
             }) {
                 Text("Login")
@@ -40,23 +45,23 @@ struct LoginView: View {
         }
         .padding()
     }
-    
-    private func saveLoggedInUser(_ user: User) {
-        if let jsonData = try? JSONEncoder().encode(user) {
-            loggedInUserData = String(data: jsonData, encoding: .utf8)
-        }
-    }
 }
 
 class LoginViewModel: ObservableObject {
     @Published var username = ""
-    
+    @Published var password = ""
+
     private var cancellables = Set<AnyCancellable>()
 
     func login(completion: @escaping (User) -> Void) {
-        let randomEmoji = ["😀", "🚀", "🎉", "🌟", "🔥", "🍀"].randomElement() ?? "😎"
-        let newUserPayload = NewUserPayload(name: username, password: "password", emoji: randomEmoji)
-        let newUser = User(id: 1, name: username, emoji: randomEmoji)
-        completion(newUser)
+        if !username.isEmpty && !password.isEmpty {
+            let payload = UserLoginPayload(name: username, password: password)
+
+            AuthorizationResource.shared.login(payload) { user in
+                completion(user)
+            }
+        } else {
+            print("Login failed: Invalid credentials")
+        }
     }
 }

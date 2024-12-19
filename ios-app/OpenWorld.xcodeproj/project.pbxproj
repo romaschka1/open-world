@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D8CE14F2D136D2E007BBA90 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8CE14E2D136D21007BBA90 /* Authorization.swift */; };
 		D53BFD522C866286005CC731 /* OpenWorldApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53BFD512C866286005CC731 /* OpenWorldApp.swift */; };
 		D53BFD562C866287005CC731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D53BFD552C866287005CC731 /* Assets.xcassets */; };
 		D5BD4F852CFA296400849906 /* UserLocationResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD4F842CFA296400849906 /* UserLocationResource.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D8CE14E2D136D21007BBA90 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		D53BFD4E2C866286005CC731 /* OpenWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D53BFD512C866286005CC731 /* OpenWorldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWorldApp.swift; sourceTree = "<group>"; };
 		D53BFD552C866287005CC731 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,6 +44,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D5297242D1223980074F2E2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		D53BFD452C866286005CC731 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +76,7 @@
 				D53BFD622C866303005CC731 /* Models */,
 				D53BFD512C866286005CC731 /* OpenWorldApp.swift */,
 				D53BFD552C866287005CC731 /* Assets.xcassets */,
+				4D5297242D1223980074F2E2 /* Preview Content */,
 			);
 			path = OpenWorld;
 			sourceTree = "<group>";
@@ -83,6 +93,7 @@
 		D5BD4F822CFA284500849906 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4D8CE14E2D136D21007BBA90 /* Authorization.swift */,
 				D5BD4F862CFA2C3200849906 /* Constants.swift */,
 			);
 			path = Utils;
@@ -181,6 +192,7 @@
 				D5BD4F9B2D00D47800849906 /* User.swift in Sources */,
 				D5BD4F952D00CE5400849906 /* MapView.swift in Sources */,
 				D5BD4F872CFA2C3200849906 /* Constants.swift in Sources */,
+				4D8CE14F2D136D2E007BBA90 /* Authorization.swift in Sources */,
 				D5BD4F9D2D00DA2800849906 /* UserLocation.swift in Sources */,
 				D5BD4F992D00D43000849906 /* AuthorizationResource.swift in Sources */,
 			);

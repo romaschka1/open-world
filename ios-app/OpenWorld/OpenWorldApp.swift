@@ -9,16 +9,23 @@ import SwiftUI
 
 @main
 struct OpenWorldApp: App {
-    @AppStorage("isLoggedIn") private var isLoggedIn = false
+    @State private var isAuthorizedUser: Bool = false
 
     var body: some Scene {
-        WindowGroup {
-//            if isLoggedIn {
-                MapRepresentable()
-                    .edgesIgnoringSafeArea(.all)
-//            } else {
-//                LoginView()
-//            }
+       WindowGroup {
+           VStack {
+               if isAuthorizedUser {
+                   MapRepresentable()
+                       .edgesIgnoringSafeArea(.all)
+               } else {
+                   LoginView(isLoggedIn: $isAuthorizedUser)
+               }
+           }
+           .onAppear {
+               isAuthorized { authorized in
+                   isAuthorizedUser = authorized
+               }
+           }
         }
     }
 }
