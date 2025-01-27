@@ -5,20 +5,28 @@
 //  Created by romaska on 29.11.2024.
 //
 
-import UIKit
+import Foundation
 
 class UserLocationResource {
+    
+    static let shared = UserLocationResource()
+    private var session: URLSession
+
+    private init() {
+       let config = URLSessionConfiguration.default
+       config.protocolClasses = [ApiInterceptor.self]
+       session = URLSession(configuration: config)
+    }
+
     func getLocations(completion: @escaping ([[UserLocation]]) -> Void) {
-        guard var urlComponents = URLComponents(string: API.baseURL + "location") else { return }
+        var urlComponents = URLComponents(string: API.baseURL + "location")!
         guard let userId = getLoggedUser()?.id else { return }
 
         urlComponents.queryItems = [
             URLQueryItem(name: "userId", value: String(userId))
         ]
         
-        let url = urlComponents.url!
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        let task = session.dataTask(with: urlComponents.url!) { data, response, error in
             if let error = error {
                 print("Error fetching data: \(error)")
                 return
@@ -42,14 +50,12 @@ class UserLocationResource {
     }
     
     func sendLocations(_ locations: [UserLocation], completion: @escaping (Bool) -> Void) {
-        guard var urlComponents = URLComponents(string: API.baseURL + "location") else { return }
+        var urlComponents = URLComponents(string: API.baseURL + "location")!
         guard let userId = getLoggedUser()?.id else { return }
 
         urlComponents.queryItems = [URLQueryItem(name: "userId", value: String(userId))]
-    
-        let url = urlComponents.url!
 
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -61,7 +67,7 @@ class UserLocationResource {
             return
         }
 
-        let task = URLSession.shared.dataTask(with: request) { _, response, error in
+        let task = session.dataTask(with: request) { _, response, error in
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
                 completion(true)
             } else {

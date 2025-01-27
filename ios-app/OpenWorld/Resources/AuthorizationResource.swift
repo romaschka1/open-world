@@ -10,13 +10,16 @@ import Foundation
 class AuthorizationResource {
     
     static let shared = AuthorizationResource()
+    private var session: URLSession
 
-    func login(_ payload: UserLoginPayload, completion: @escaping (User) -> Void) {
-        guard let url = URL(string: API.baseURL + "authorization/login") else {
-            return
-        }
+    private init() {
+       let config = URLSessionConfiguration.default
+       config.protocolClasses = [ApiInterceptor.self]
+       session = URLSession(configuration: config)
+    }
 
-        var request = URLRequest(url: url)
+    func login(_ payload: UserLoginPayload, completion: @escaping (Result<AuthorizationTokens, Error>) -> Void) {
+        var request = URLRequest(url: URL(string: API.baseURL + "authorization/login")!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -24,24 +27,92 @@ class AuthorizationResource {
             let jsonData = try JSONEncoder().encode(payload)
             request.httpBody = jsonData
         } catch {
+            completion(.failure(URLError(.cannotDecodeContentData)))
             return
         }
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("Error authorizing user: \(error)")
+                completion(.failure(error))
                 return
             }
+            
             guard let data = data else {
-                print("No data received")
+                completion(.failure(URLError(.badServerResponse)))
                 return
             }
 
             do {
-                let user = try JSONDecoder().decode(User.self, from: data)
-                completion(user);
+                let response = try JSONDecoder().decode(AuthorizationTokens.self, from: data)
+                storeTokens(tokens: response)
+
+                completion(.success(response))
             } catch {
-                print("Error decoding JSON: \(error)")
+                completion(.failure(error))
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func verifyToken(completion: @escaping (Bool) -> Void) {
+        let request = URLRequest(url: URL(string: API.baseURL + "authorization/verify")!)
+
+        let task = session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error making request: \(error)")
+                completion(false)
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
+                  let data = data else {
+                print("Invalid response or data")
+                completion(false)
+                return
+            }
+
+            if let isValid = try? JSONDecoder().decode(Bool.self, from: data) {
+                completion(isValid)
+            } else {
+                print("Failed to decode response")
+                completion(false)
+            }
+        }
+
+        task.resume()
+    }
+    
+    func fetchRefreshToken(completion: @escaping (Bool) -> Void) {
+        var request = URLRequest(url: URL(string: API.baseURL + "authorization/refresh")!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+        do {
+            let tokens = AuthorizationTokens(
+                accessToken: fetchTokenFromKeychain(key: "AccessToken"),
+                refreshToken: fetchTokenFromKeychain(key: "RefreshToken")
+            )
+            let jsonData = try JSONEncoder().encode(tokens)
+            request.httpBody = jsonData
+        } catch {
+            return
+        }
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error refreshing token: \(error)")
+                completion(false)
+                return
+            }
+            
+            do {
+                let newTokens = try JSONDecoder().decode(AuthorizationTokens.self, from: data!)
+                storeTokens(tokens: newTokens)
+                completion(true)
+            } catch {
+                completion(false)
+                return
             }
         }
         

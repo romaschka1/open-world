@@ -25,7 +25,10 @@ public class LocationResource {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<List<UserLocationDTO>>> getUserLocation (@RequestParam Long userId) {
+    public ResponseEntity<List<List<UserLocationDTO>>> getUserLocation (
+            @RequestHeader("Authorization") String token,
+            @RequestParam Long userId
+    ) {
         return ResponseEntity.ok().body(userLocationService.getUserLocations(userId));
     }
 }

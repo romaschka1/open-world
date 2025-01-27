@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D440C1C2D1EC0E0008740AA /* Constants-prod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D440C1B2D1EC0D6008740AA /* Constants-prod.swift */; };
+		4D440C1E2D1EC144008740AA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4D440C1D2D1EC144008740AA /* .gitignore */; };
+		4D440C202D22B542008740AA /* AuthorizationTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D440C1F2D22B531008740AA /* AuthorizationTokens.swift */; };
+		4D440C222D22B631008740AA /* TokenManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D440C212D22B622008740AA /* TokenManagement.swift */; };
+		4D440C252D22BB62008740AA /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 4D440C242D22BB62008740AA /* JWTDecode */; };
+		4D440C272D22F703008740AA /* ApiInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D440C262D22F6FC008740AA /* ApiInterceptor.swift */; };
 		4D8CE14F2D136D2E007BBA90 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8CE14E2D136D21007BBA90 /* Authorization.swift */; };
 		D53BFD522C866286005CC731 /* OpenWorldApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53BFD512C866286005CC731 /* OpenWorldApp.swift */; };
 		D53BFD562C866287005CC731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D53BFD552C866287005CC731 /* Assets.xcassets */; };
@@ -20,6 +26,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D1271E22D19FF2100690BC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D440C1B2D1EC0D6008740AA /* Constants-prod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants-prod.swift"; sourceTree = "<group>"; };
+		4D440C1D2D1EC144008740AA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
+		4D440C1F2D22B531008740AA /* AuthorizationTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTokens.swift; sourceTree = "<group>"; };
+		4D440C212D22B622008740AA /* TokenManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManagement.swift; sourceTree = "<group>"; };
+		4D440C262D22F6FC008740AA /* ApiInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiInterceptor.swift; sourceTree = "<group>"; };
 		4D8CE14E2D136D21007BBA90 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		D53BFD4E2C866286005CC731 /* OpenWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D53BFD512C866286005CC731 /* OpenWorldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWorldApp.swift; sourceTree = "<group>"; };
@@ -38,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D440C252D22BB62008740AA /* JWTDecode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +90,8 @@
 				D53BFD512C866286005CC731 /* OpenWorldApp.swift */,
 				D53BFD552C866287005CC731 /* Assets.xcassets */,
 				4D5297242D1223980074F2E2 /* Preview Content */,
+				4D1271E22D19FF2100690BC6 /* Info.plist */,
+				4D440C1D2D1EC144008740AA /* .gitignore */,
 			);
 			path = OpenWorld;
 			sourceTree = "<group>";
@@ -84,6 +99,7 @@
 		D53BFD622C866303005CC731 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4D440C1F2D22B531008740AA /* AuthorizationTokens.swift */,
 				D5BD4F9A2D00D47800849906 /* User.swift */,
 				D5BD4F9C2D00DA2800849906 /* UserLocation.swift */,
 			);
@@ -93,6 +109,9 @@
 		D5BD4F822CFA284500849906 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4D440C262D22F6FC008740AA /* ApiInterceptor.swift */,
+				4D440C212D22B622008740AA /* TokenManagement.swift */,
+				4D440C1B2D1EC0D6008740AA /* Constants-prod.swift */,
 				4D8CE14E2D136D21007BBA90 /* Authorization.swift */,
 				D5BD4F862CFA2C3200849906 /* Constants.swift */,
 			);
@@ -145,7 +164,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					D53BFD4D2C866286005CC731 = {
 						CreatedOnToolsVersion = 15.4;
@@ -161,6 +180,9 @@
 				Base,
 			);
 			mainGroup = D53BFD452C866286005CC731;
+			packageReferences = (
+				4D440C232D22BB62008740AA /* XCRemoteSwiftPackageReference "JWTDecode" */,
+			);
 			productRefGroup = D53BFD4F2C866286005CC731 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -175,6 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D440C1E2D1EC144008740AA /* .gitignore in Resources */,
 				D53BFD562C866287005CC731 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,13 +210,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5BD4F972D00D12300849906 /* LoginView.swift in Sources */,
+				4D440C202D22B542008740AA /* AuthorizationTokens.swift in Sources */,
 				D53BFD522C866286005CC731 /* OpenWorldApp.swift in Sources */,
 				D5BD4F852CFA296400849906 /* UserLocationResource.swift in Sources */,
 				D5BD4F9B2D00D47800849906 /* User.swift in Sources */,
+				4D440C1C2D1EC0E0008740AA /* Constants-prod.swift in Sources */,
 				D5BD4F952D00CE5400849906 /* MapView.swift in Sources */,
 				D5BD4F872CFA2C3200849906 /* Constants.swift in Sources */,
 				4D8CE14F2D136D2E007BBA90 /* Authorization.swift in Sources */,
 				D5BD4F9D2D00DA2800849906 /* UserLocation.swift in Sources */,
+				4D440C272D22F703008740AA /* ApiInterceptor.swift in Sources */,
+				4D440C222D22B631008740AA /* TokenManagement.swift in Sources */,
 				D5BD4F992D00D43000849906 /* AuthorizationResource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +355,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenWorld/Preview Content\"";
+				DEVELOPMENT_TEAM = DTJPXXBUDJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenWorld/Info.plist;
@@ -358,6 +386,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenWorld/Preview Content\"";
+				DEVELOPMENT_TEAM = DTJPXXBUDJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenWorld/Info.plist;
@@ -402,6 +431,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4D440C232D22BB62008740AA /* XCRemoteSwiftPackageReference "JWTDecode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4D440C242D22BB62008740AA /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D440C232D22BB62008740AA /* XCRemoteSwiftPackageReference "JWTDecode" */;
+			productName = JWTDecode;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D53BFD462C866286005CC731 /* Project object */;
 }

@@ -21,10 +21,10 @@ public class UserLocation {
     @Column(name = "group_id", nullable = false)
     private  Long groupId;
 
-    @Column(name = "latitude", nullable = false)
+    @Column(name="latitude", columnDefinition="Decimal(38,6)", nullable = false)
     private BigDecimal latitude;
 
-    @Column(name = "longitude", nullable = false)
+    @Column(name="longitude", columnDefinition="Decimal(38,6)", nullable = false)
     private BigDecimal longitude;
 
     @Column(name = "time", nullable = false)

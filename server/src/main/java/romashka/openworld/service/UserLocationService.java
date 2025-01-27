@@ -3,14 +3,10 @@ package romashka.openworld.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import romashka.openworld.domain.User;
 import romashka.openworld.domain.UserLocation;
 import romashka.openworld.repository.UserLocationRepository;
-import romashka.openworld.repository.UserRepository;
 import romashka.openworld.service.dto.UserLocationDTO;
 import romashka.openworld.service.mapper.UserLocationMapper;
-import romashka.openworld.service.mapper.UserMapper;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

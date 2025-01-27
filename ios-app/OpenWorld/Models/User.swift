@@ -10,11 +10,16 @@ import Foundation
 struct User: Codable {
     var id: Int
     var name: String
-    var password: String
     var emoji: String
+    var password: String?
 }
 
 struct UserLoginPayload: Encodable {
     var name: String
     var password: String
+}
+
+struct UserLoginResponse: Codable {
+    var user: User
+    var token: String
 }

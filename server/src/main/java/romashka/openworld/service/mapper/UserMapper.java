@@ -6,8 +6,8 @@ import romashka.openworld.service.dto.UserDTO;
 
 @Mapper(componentModel = "spring", uses = {})
 public interface UserMapper extends EntityMapper<UserDTO, User> {
-    UserDTO toDto(User location);
-    User toEntity(UserDTO locationDTO);
+    UserDTO toDto(User user);
+    User toEntity(UserDTO userDTO);
 
     default User fromId(Long id) {
         if (id == null) {

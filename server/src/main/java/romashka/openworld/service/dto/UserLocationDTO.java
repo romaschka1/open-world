@@ -11,7 +11,6 @@ import java.time.Instant;
 @Setter
 @Getter
 public class UserLocationDTO {
-
     private Long groupId;
     private Long userId;
     private Instant time;

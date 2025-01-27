@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import JWTDecode
 
 func getLoggedUser() -> User? {
     guard let userData = UserDefaults.standard.data(forKey: "loggedUser") else {
@@ -37,15 +38,18 @@ func decodeUser(from data: Data) -> User? {
     }
 }
 
-func isAuthorized(completion: @escaping (Bool) -> Void) {
-    guard let user = getLoggedUser() else {
-        completion(false)
-        return;
-    }
-    
-    let payload = UserLoginPayload(name: user.name, password: user.password)
-    
-    AuthorizationResource.shared.login(payload) { _ in
-        completion(true)
+func createUserFromToken(tokens: AuthorizationTokens) -> User? {
+    do {
+        let jwt = try decode(jwt: tokens.refreshToken)
+        guard let id = jwt.claim(name: "id").string,
+              let name = jwt.claim(name: "name").string,
+              let emoji = jwt.claim(name: "emoji").string else {
+            print("Required claims are missing in the token")
+            return nil
+        }
+        return User(id: Int(id)!, name: name, emoji: emoji)
+    } catch {
+        print("Error decoding token: \(error.localizedDescription)")
+        return nil
     }
 }

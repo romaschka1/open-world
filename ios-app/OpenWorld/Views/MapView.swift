@@ -17,17 +17,7 @@ class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     private var locationsToDraw: [CLLocationCoordinate2D] = []
     private var locationsToSend: [UserLocation] = []
     
-    private let userLocationResource: UserLocationResource
-    
     private var timer: Timer?
-
-    init(userLocationResource: UserLocationResource = UserLocationResource()) {
-        self.userLocationResource = userLocationResource
-        super.init(nibName: nil, bundle: nil)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +41,7 @@ class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     }
 
     func loadStoredLocations() {
-        userLocationResource.getLocations { data in
+        UserLocationResource.shared.getLocations { data in
             for group in data {
                 let coordinates = group.map { location in
                     CLLocationCoordinate2D(
@@ -75,7 +65,7 @@ class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         )
     }
     @objc private func sendLocationToServer() {
-        userLocationResource.sendLocations(locationsToSend) { success in
+        UserLocationResource.shared.sendLocations(locationsToSend) { success in
             if success {
                 print("Locations were sent successfully.")
                 self.locationsToSend.removeAll()
@@ -87,6 +77,7 @@ class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let newLocation = locations.last else { return }
+
         locationsToDraw.append(newLocation.coordinate)
         locationsToSend.append(
             UserLocation.init(
@@ -97,6 +88,14 @@ class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         )
 
         drawPath(data: locationsToDraw)
+        
+        // Clear array to reduce load
+        // ToDo: Figureout something more efficient
+        if (locationsToDraw.count >= 100) {
+            if let lastLocation = self.locationsToDraw.last {
+                self.locationsToDraw = [lastLocation]
+            }
+        }
     }
 
     func drawPath(data: [CLLocationCoordinate2D]) {

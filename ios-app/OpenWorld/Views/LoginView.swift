@@ -28,9 +28,14 @@ struct LoginView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             Button(action: {
-                viewModel.login { user in
-                    isLoggedIn = true;
-                    loggedUserData = encodeUser(user)
+                viewModel.login { result in
+                    switch result {
+                        case .success(let tokens):
+                            isLoggedIn = true;
+                            loggedUserData = encodeUser(createUserFromToken(tokens: tokens)!)
+                        case .failure(let error):
+                            print("Login failed: \(error.localizedDescription)")
+                    }
                 }
             }) {
                 Text("Login")
@@ -53,15 +58,16 @@ class LoginViewModel: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
-    func login(completion: @escaping (User) -> Void) {
+    func login(completion: @escaping (Result<AuthorizationTokens, Error>) -> Void) {
         if !username.isEmpty && !password.isEmpty {
             let payload = UserLoginPayload(name: username, password: password)
 
-            AuthorizationResource.shared.login(payload) { user in
-                completion(user)
+            AuthorizationResource.shared.login(payload) { result in
+                completion(result)
             }
         } else {
-            print("Login failed: Invalid credentials")
+            let error = NSError(domain: "LoginError", code: 400, userInfo: [NSLocalizedDescriptionKey: "Invalid credentials"])
+            completion(.failure(error))
         }
     }
 }
