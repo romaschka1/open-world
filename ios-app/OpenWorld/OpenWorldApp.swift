@@ -9,28 +9,59 @@ import SwiftUI
 
 @main
 struct OpenWorldApp: App {
-    @State private var isAuthorizedUser: Bool = false
-    @State private var isLoading: Bool = true
+    @State private var initialLocations: [[UserLocation]] = []
+    @State private var hasAppeared: Bool = false
+    
+    @StateObject private var router = BaseRouter()
 
     var body: some Scene {
-       WindowGroup {
-           VStack {
-               if isLoading {
-                   ProgressView("Logging in...").padding()
-               } else if isAuthorizedUser {
-                   MapRepresentable().edgesIgnoringSafeArea(.all)
-               } else {
-                   LoginView(isLoggedIn: $isAuthorizedUser)
-               }
-           }
-           .onAppear {
-               AuthorizationResource.shared.verifyToken() { response in
-                   DispatchQueue.main.async {
-                       isAuthorizedUser = response
-                       isLoading = false
-                   }
-               }
-           }
+        WindowGroup {
+            NavigationStack(path: $router.path) {
+                VStack {
+                    ProgressView().padding()
+                }
+                .navigationDestination(for: Routes.self) { route in
+                    switch route {
+                        case .login:
+                            LoginView()
+                                .navigationBarBackButtonHidden(true)
+                        case .map:
+                            MapRepresentable(locations: $initialLocations)
+                                .edgesIgnoringSafeArea(.all)
+                                .navigationBarBackButtonHidden(true)
+                    }
+                }
+                .environmentObject(router)
+            }
+            .onAppear {
+                // Perform initial navigation only once
+                if !hasAppeared {
+                    hasAppeared = true
+                    ApiInterceptor.router = router
+                    initialNavigation(router: router)
+                }
+            }
+        }
+    }
+
+    
+    private func initialNavigation(router: BaseRouter) {
+        // Check if user is authorized by calling `getLocations`
+        guard let userId = getLoggedUser()?.id else {
+            router.navigate(route: Routes.login)
+            return
+        }
+
+        UserLocationResource.shared.getLocations(userId) { result in
+            switch result {
+                case .success(let locations):
+                    initialLocations = locations
+                    router.navigate(route: Routes.map)
+                    
+                case .failure(let error):
+                    print("Error fetching locations: \(error.localizedDescription)")
+                    router.navigate(route: Routes.login)
+            }
         }
     }
 }

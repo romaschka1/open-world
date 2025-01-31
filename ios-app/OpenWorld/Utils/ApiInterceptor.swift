@@ -8,22 +8,24 @@
 import Foundation
 
 class ApiInterceptor: URLProtocol {
+    static weak var router: BaseRouter?
+
     static var excludedEndpoints: [String] = [
         API.baseURL + "authorization/refresh",
         API.baseURL + "authorization/login"
     ]
     
-    // Check if the URL matches any excluded endpoint
     override class func canInit(with request: URLRequest) -> Bool {
-       guard let urlString = request.url?.absoluteString else { return false }
-
-       for endpoint in excludedEndpoints {
+        guard let urlString = request.url?.absoluteString else { return false }
+        
+        // Skip intercepting URL if it's present in `excludedEndpoints`
+        for endpoint in excludedEndpoints {
            if urlString.contains(endpoint) {
                return false
            }
-       }
+        }
 
-       return request.url?.scheme == "http" || request.url?.scheme == "https"
+        return true
    }
 
     override class func canonicalRequest(for request: URLRequest) -> URLRequest {
@@ -37,6 +39,7 @@ class ApiInterceptor: URLProtocol {
         modifiedRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
 
         let task = URLSession.shared.dataTask(with: modifiedRequest) { data, response, error in
+            // Call refresh enpoint, if request is unauthorised
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 401 {
                 AuthorizationResource.shared.fetchRefreshToken() { success in
                     if success {
@@ -47,6 +50,7 @@ class ApiInterceptor: URLProtocol {
                 }
             } else if let error = error {
                 self.client?.urlProtocol(self, didFailWithError: error)
+            // Request don't have any isses
             } else {
                 if let response = response {
                     self.client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
@@ -72,6 +76,8 @@ class ApiInterceptor: URLProtocol {
 
         let task = URLSession.shared.dataTask(with: modifiedRequest) { data, response, error in
             if let error = error {
+                // Token expires, force user to login arain
+                ApiInterceptor.router?.navigate(route: Routes.login)
                 self.client?.urlProtocol(self, didFailWithError: error)
             } else {
                 if let response = response {

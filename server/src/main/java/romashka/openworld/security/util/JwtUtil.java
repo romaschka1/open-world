@@ -2,7 +2,6 @@ package romashka.openworld.security.util;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -29,10 +28,6 @@ public class JwtUtil {
         return extractClaim(token, claims -> claims.get("id", String.class));
     }
 
-    public Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
@@ -46,13 +41,8 @@ public class JwtUtil {
             .getBody();
     }
 
-    private Boolean isTokenExpired(String token) {
-        Date date = extractExpiration(token);
-        return date.before(new Date());
-    }
-
     public String generateAccessToken(User user) {
-        final int EXPIRATION_TIME = 1000 * 60 * 1; // 1 minutes
+        final int EXPIRATION_TIME = 1000 * 60 * 1; // 5 minutes
         return generateToken(user, EXPIRATION_TIME);
     }
 

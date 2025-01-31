@@ -13,12 +13,21 @@ class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     private var mapView: MKMapView!
     private var locationManager: CLLocationManager!
-
+    
+    private var storedLocations: [[UserLocation]] = []
     private var locationsToDraw: [CLLocationCoordinate2D] = []
     private var locationsToSend: [UserLocation] = []
     
     private var timer: Timer?
     
+    init(locations: [[UserLocation]]) {
+       self.storedLocations = locations
+       super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+       super.init(coder: coder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,22 +49,20 @@ class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         startSendingLocationToServer()
     }
 
-    func loadStoredLocations() {
-        UserLocationResource.shared.getLocations { data in
-            for group in data {
-                let coordinates = group.map { location in
-                    CLLocationCoordinate2D(
-                        latitude: location.latitude,
-                        longitude: location.longitude
-                    )
-                }
-                
-                self.drawPath(data: coordinates)
+    func loadStoredLocations() -> Void {
+        for group in self.storedLocations {
+            let coordinates = group.map { location in
+                CLLocationCoordinate2D(
+                    latitude: location.latitude,
+                    longitude: location.longitude
+                )
             }
+            
+            self.drawPath(data: coordinates)
         }
     }
     
-    func startSendingLocationToServer() {
+    func startSendingLocationToServer() -> Void {
         timer = Timer.scheduledTimer(
             timeInterval: 60,
             target: self,
@@ -106,8 +113,8 @@ class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
             let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = UIColor.red
-            renderer.lineWidth = 3
+            renderer.strokeColor = UIColor.blue
+            renderer.lineWidth = 2
             return renderer
         }
         return MKOverlayRenderer()
@@ -115,9 +122,10 @@ class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 }
 
 struct MapRepresentable: UIViewControllerRepresentable {
+    @Binding var locations: [[UserLocation]]
     
     func makeUIViewController(context: Context) -> MapView {
-        return MapView()
+        return MapView(locations: self.locations)
     }
     
     func updateUIViewController(_ uiViewController: MapView, context: Context) {

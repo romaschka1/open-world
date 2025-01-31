@@ -11,10 +11,10 @@ import Combine
 
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
-
-    @AppStorage("loggedUser") private var loggedUserData: Data?
     
-    @Binding var isLoggedIn: Bool
+    @AppStorage("loggedUser") private var loggedUserData: Data?
+
+    @EnvironmentObject private var router: BaseRouter
 
     var body: some View {
         VStack {
@@ -31,8 +31,9 @@ struct LoginView: View {
                 viewModel.login { result in
                     switch result {
                         case .success(let tokens):
-                            isLoggedIn = true;
                             loggedUserData = encodeUser(createUserFromToken(tokens: tokens)!)
+                            router.navigate(route: Routes.map)
+                            
                         case .failure(let error):
                             print("Login failed: \(error.localizedDescription)")
                     }

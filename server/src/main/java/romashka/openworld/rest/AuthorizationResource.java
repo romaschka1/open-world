@@ -41,6 +41,7 @@ public class AuthorizationResource {
         }
 
         String userId = jwtUtil.extractUserId(refreshToken);
+
         User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(() -> new RuntimeException("Invalid token data"));
 
         String newAccessToken = jwtUtil.generateAccessToken(user);
@@ -51,11 +52,5 @@ public class AuthorizationResource {
                 .refreshToken(newRefreshToken)
                 .build()
         );
-    }
-
-    // ToDo: Remove and check token validity based on initial get locations call
-    @GetMapping("verify")
-    public ResponseEntity<Boolean> verifyToken(@RequestHeader("Authorization") String token) {
-        return ResponseEntity.ok(true);
     }
 }

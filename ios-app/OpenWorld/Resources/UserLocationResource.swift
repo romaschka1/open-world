@@ -18,35 +18,44 @@ class UserLocationResource {
        session = URLSession(configuration: config)
     }
 
-    func getLocations(completion: @escaping ([[UserLocation]]) -> Void) {
-        var urlComponents = URLComponents(string: API.baseURL + "location")!
-        guard let userId = getLoggedUser()?.id else { return }
-
-        urlComponents.queryItems = [
-            URLQueryItem(name: "userId", value: String(userId))
-        ]
-        
-        let task = session.dataTask(with: urlComponents.url!) { data, response, error in
-            if let error = error {
-                print("Error fetching data: \(error)")
-                return
-            }
-            guard let data = data else {
-                print("No data received")
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let locations = try decoder.decode([[UserLocation]].self, from: data)
-
-                completion(locations)
-            } catch {
-                print("Error decoding JSON: \(error)")
-            }
-        }
-        
-        task.resume()
+    func getLocations(_ userId: Int, completion: @escaping (Result<[[UserLocation]], Error>) -> Void) {
+       var urlComponents = URLComponents(string: API.baseURL + "location")!
+       
+       urlComponents.queryItems = [
+           URLQueryItem(name: "userId", value: String(userId))
+       ]
+       
+       guard let url = urlComponents.url else {
+           completion(.failure(NetworkError.invalidURL))
+           return
+       }
+       
+       let task = session.dataTask(with: url) { data, response, error in
+           if let error = error {
+               completion(.failure(error))
+               return
+           }
+           
+           guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+               completion(.failure(NetworkError.invalidResponse))
+               return
+           }
+           
+           guard let data = data else {
+               completion(.failure(NetworkError.noData))
+               return
+           }
+           
+           do {
+               let decoder = JSONDecoder()
+               let locations = try decoder.decode([[UserLocation]].self, from: data)
+               completion(.success(locations))
+           } catch {
+               completion(.failure(NetworkError.decodingError(error)))
+           }
+       }
+       
+       task.resume()
     }
     
     func sendLocations(_ locations: [UserLocation], completion: @escaping (Bool) -> Void) {

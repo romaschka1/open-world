@@ -55,34 +55,6 @@ class AuthorizationResource {
         task.resume()
     }
     
-    func verifyToken(completion: @escaping (Bool) -> Void) {
-        let request = URLRequest(url: URL(string: API.baseURL + "authorization/verify")!)
-
-        let task = session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error making request: \(error)")
-                completion(false)
-                return
-            }
-
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
-                  let data = data else {
-                print("Invalid response or data")
-                completion(false)
-                return
-            }
-
-            if let isValid = try? JSONDecoder().decode(Bool.self, from: data) {
-                completion(isValid)
-            } else {
-                print("Failed to decode response")
-                completion(false)
-            }
-        }
-
-        task.resume()
-    }
-    
     func fetchRefreshToken(completion: @escaping (Bool) -> Void) {
         var request = URLRequest(url: URL(string: API.baseURL + "authorization/refresh")!)
         request.httpMethod = "POST"
