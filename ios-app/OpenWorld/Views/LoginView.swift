@@ -21,12 +21,14 @@ struct LoginView: View {
             Text("Login")
                 .font(.largeTitle)
                 .padding()
+
             TextField("Username", text: $viewModel.username)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             SecureField("Password", text: $viewModel.password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+            
             Button(action: {
                 viewModel.login { result in
                     switch result {
@@ -48,6 +50,15 @@ struct LoginView: View {
                     .cornerRadius(8)
                     .padding()
             }
+            
+            Button(action: {
+                router.navigate(route: Routes.registration)
+           }) {
+               Text("Don't have an account? Register")
+                   .font(.subheadline)
+                   .foregroundColor(.blue)
+                   .padding()
+           }
         }
         .padding()
     }

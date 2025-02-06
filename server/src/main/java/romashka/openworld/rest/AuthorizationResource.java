@@ -7,8 +7,10 @@ import romashka.openworld.domain.User;
 import romashka.openworld.repository.UserRepository;
 import romashka.openworld.rest.vm.AuthorizationTokens;
 import romashka.openworld.rest.vm.UserLoginPayload;
+import romashka.openworld.rest.vm.UserRegisterPayload;
 import romashka.openworld.security.util.JwtUtil;
 import romashka.openworld.service.AuthorizationService;
+
 
 @RestController
 @RequestMapping("/api/authorization/")
@@ -20,17 +22,31 @@ public class AuthorizationResource {
     private final UserRepository userRepository;
 
     @PostMapping("login")
-    public ResponseEntity<AuthorizationTokens> login (@RequestBody UserLoginPayload payload) {
+    public ResponseEntity<AuthorizationTokens> login(@RequestBody UserLoginPayload payload) {
         User user = authorizationService.login(payload);
         String access = jwtUtil.generateAccessToken(user);
         String refresh = jwtUtil.generateRefreshToken(user);
 
         return ResponseEntity.ok(AuthorizationTokens.builder()
-                .accessToken(access)
-                .refreshToken(refresh)
-                .build()
+            .accessToken(access)
+            .refreshToken(refresh)
+            .build()
         );
     }
+
+    @PostMapping("register")
+    public ResponseEntity<AuthorizationTokens> register(@RequestBody UserRegisterPayload payload) {
+        User user = authorizationService.register(payload);
+        String access = jwtUtil.generateAccessToken(user);
+        String refresh = jwtUtil.generateRefreshToken(user);
+
+        return ResponseEntity.ok(AuthorizationTokens.builder()
+            .accessToken(access)
+            .refreshToken(refresh)
+            .build()
+        );
+    }
+    
 
     @PostMapping("refresh")
     public ResponseEntity<?> refreshAccessToken(@RequestBody AuthorizationTokens tokenRequest) {
@@ -48,9 +64,9 @@ public class AuthorizationResource {
         String newRefreshToken = jwtUtil.generateRefreshToken(user);
 
         return ResponseEntity.ok(AuthorizationTokens.builder()
-                .accessToken(newAccessToken)
-                .refreshToken(newRefreshToken)
-                .build()
+            .accessToken(newAccessToken)
+            .refreshToken(newRefreshToken)
+            .build()
         );
     }
 }

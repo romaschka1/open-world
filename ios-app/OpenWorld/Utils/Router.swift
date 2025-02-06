@@ -11,6 +11,7 @@ import SwiftUI
 protocol Routeable: Codable, Hashable {}
 
 enum Routes: Routeable {
+    case registration
     case login
     case map
 }

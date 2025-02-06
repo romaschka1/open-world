@@ -17,8 +17,46 @@ class AuthorizationResource {
        config.protocolClasses = [ApiInterceptor.self]
        session = URLSession(configuration: config)
     }
+    
+    func register(_ payload: UserRegisterPayload, completion: @escaping (Result<AuthorizationTokens, Error>) -> Void)
+    {
+        var request = URLRequest(url: URL(string: API.baseURL + "authorization/register")!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            let jsonData = try JSONEncoder().encode(payload)
+            request.httpBody = jsonData
+        } catch {
+            completion(.failure(URLError(.cannotDecodeContentData)))
+            return
+        }
 
-    func login(_ payload: UserLoginPayload, completion: @escaping (Result<AuthorizationTokens, Error>) -> Void) {
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(URLError(.badServerResponse)))
+                return
+            }
+
+            do {
+                let response = try JSONDecoder().decode(AuthorizationTokens.self, from: data)
+                storeTokens(tokens: response)
+                completion(.success(response))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+        
+        task.resume()
+    }
+
+    func login(_ payload: UserLoginPayload, completion: @escaping (Result<AuthorizationTokens, Error>) -> Void)
+    {
         var request = URLRequest(url: URL(string: API.baseURL + "authorization/login")!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

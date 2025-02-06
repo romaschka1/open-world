@@ -19,7 +19,8 @@ struct UserLoginPayload: Encodable {
     var password: String
 }
 
-struct UserLoginResponse: Codable {
-    var user: User
-    var token: String
+struct UserRegisterPayload: Encodable {
+    var name: String;
+    var emoji: String;
+    var password: String;
 }

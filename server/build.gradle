@@ -49,6 +49,8 @@ dependencies {
 
 	// JJWT Jackson library for JSON serialization/deserialization
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	implementation 'org.bouncycastle:bcprov-jdk18on:1.77'
 }
 
 tasks.named('test') {

@@ -22,6 +22,9 @@ struct OpenWorldApp: App {
                 }
                 .navigationDestination(for: Routes.self) { route in
                     switch route {
+                        case .registration:
+                            RegistrationView()
+                                .navigationBarBackButtonHidden(true)
                         case .login:
                             LoginView()
                                 .navigationBarBackButtonHidden(true)
@@ -31,8 +34,8 @@ struct OpenWorldApp: App {
                                 .navigationBarBackButtonHidden(true)
                     }
                 }
-                .environmentObject(router)
             }
+            .environmentObject(router)
             .onAppear {
                 // Perform initial navigation only once
                 if !hasAppeared {
@@ -48,7 +51,7 @@ struct OpenWorldApp: App {
     private func initialNavigation(router: BaseRouter) {
         // Check if user is authorized by calling `getLocations`
         guard let userId = getLoggedUser()?.id else {
-            router.navigate(route: Routes.login)
+            router.navigate(route: Routes.registration)
             return
         }
 
@@ -60,7 +63,7 @@ struct OpenWorldApp: App {
                     
                 case .failure(let error):
                     print("Error fetching locations: \(error.localizedDescription)")
-                    router.navigate(route: Routes.login)
+                    router.navigate(route: Routes.registration)
             }
         }
     }

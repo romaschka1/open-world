@@ -1,10 +1,14 @@
 package romashka.openworld.service.dto;
 
-import java.math.BigDecimal;
-import java.time.Instant;
-
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+@Data
+@Setter
+@Getter
 public class UserDTO {
-    private String name;
-    private String password;
-    private String emoji;
+    public String name;
+    public String password;
+    public String emoji;
 }

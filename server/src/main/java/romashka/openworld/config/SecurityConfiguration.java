@@ -1,6 +1,5 @@
 package romashka.openworld.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,7 +24,6 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AppConfig appConfig;
 
-    @Autowired
     public SecurityConfiguration(JwtAuthenticationFilter jwtAuthenticationFilter, AppConfig appConfig) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.appConfig = appConfig;
@@ -35,8 +33,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/authorization/login", "/api/authorization/refresh").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers("/api/authorization/login", "/api/authorization/register", "/api/authorization/refresh")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
             )
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -47,12 +47,12 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
 

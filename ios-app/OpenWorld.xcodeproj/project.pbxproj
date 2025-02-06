@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D2DC8482D54CDC700D6C328 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2DC8472D54CDC000D6C328 /* RegistrationView.swift */; };
 		4D440C1E2D1EC144008740AA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4D440C1D2D1EC144008740AA /* .gitignore */; };
 		4D440C202D22B542008740AA /* AuthorizationTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D440C1F2D22B531008740AA /* AuthorizationTokens.swift */; };
 		4D440C222D22B631008740AA /* TokenManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D440C212D22B622008740AA /* TokenManagement.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		4D1271E22D19FF2100690BC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D2DC8472D54CDC000D6C328 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		4D440C1D2D1EC144008740AA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		4D440C1F2D22B531008740AA /* AuthorizationTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTokens.swift; sourceTree = "<group>"; };
 		4D440C212D22B622008740AA /* TokenManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManagement.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		D5BD4F932D00CE4400849906 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4D2DC8472D54CDC000D6C328 /* RegistrationView.swift */,
 				D5BD4F942D00CE5400849906 /* MapView.swift */,
 				D5BD4F962D00D12300849906 /* LoginView.swift */,
 			);
@@ -228,6 +231,7 @@
 				4D440C272D22F703008740AA /* ApiInterceptor.swift in Sources */,
 				4DD4FB9E2D4D3B24004FD706 /* Router.swift in Sources */,
 				4DD2C3132D491C5A00A3498C /* Constants-prod.swift in Sources */,
+				4D2DC8482D54CDC700D6C328 /* RegistrationView.swift in Sources */,
 				4D440C222D22B631008740AA /* TokenManagement.swift in Sources */,
 				D5BD4F992D00D43000849906 /* AuthorizationResource.swift in Sources */,
 			);

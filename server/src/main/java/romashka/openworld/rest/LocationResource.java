@@ -1,7 +1,6 @@
 package romashka.openworld.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.query.QueryParameter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import romashka.openworld.service.UserLocationService;
