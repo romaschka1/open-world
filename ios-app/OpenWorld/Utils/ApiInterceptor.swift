@@ -12,7 +12,8 @@ class ApiInterceptor: URLProtocol {
 
     static var excludedEndpoints: [String] = [
         API.baseURL + "authorization/refresh",
-        API.baseURL + "authorization/login"
+        API.baseURL + "authorization/login",
+        API.baseURL + "authorization/isNameUnique"
     ]
     
     override class func canInit(with request: URLRequest) -> Bool {

@@ -32,6 +32,8 @@ struct OpenWorldApp: App {
                             MapRepresentable(locations: $initialLocations)
                                 .edgesIgnoringSafeArea(.all)
                                 .navigationBarBackButtonHidden(true)
+                        case .settings:
+                            SettingsView()
                     }
                 }
             }

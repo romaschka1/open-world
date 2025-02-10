@@ -14,6 +14,7 @@ enum Routes: Routeable {
     case registration
     case login
     case map
+    case settings
 }
 
 @Observable class BaseRouter: ObservableObject  {

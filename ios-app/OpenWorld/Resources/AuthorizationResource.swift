@@ -128,4 +128,44 @@ class AuthorizationResource {
         
         task.resume()
     }
+    
+    func isNameUnique(_ name: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+       var urlComponents = URLComponents(string: API.baseURL + "authorization/isNameUnique")!
+
+       urlComponents.queryItems = [
+           URLQueryItem(name: "newName", value: String(name))
+       ]
+       
+       guard let url = urlComponents.url else {
+           completion(.failure(NetworkError.invalidURL))
+           return
+       }
+       
+       let task = session.dataTask(with: url) { data, response, error in
+           if let error = error {
+               completion(.failure(error))
+               return
+           }
+           
+           guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+               completion(.failure(NetworkError.invalidResponse))
+               return
+           }
+           
+           guard let data = data else {
+               completion(.failure(NetworkError.noData))
+               return
+           }
+
+           do {
+               let decoder = JSONDecoder()
+               let result = try decoder.decode(Bool.self, from: data)
+               completion(.success(result))
+           } catch {
+               completion(.failure(NetworkError.decodingError(error)))
+           }
+       }
+       
+       task.resume()
+    }
 }

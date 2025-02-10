@@ -11,7 +11,6 @@ import romashka.openworld.rest.vm.UserRegisterPayload;
 import romashka.openworld.security.util.JwtUtil;
 import romashka.openworld.service.AuthorizationService;
 
-
 @RestController
 @RequestMapping("/api/authorization/")
 @RequiredArgsConstructor
@@ -68,5 +67,10 @@ public class AuthorizationResource {
             .refreshToken(newRefreshToken)
             .build()
         );
+    }
+
+    @GetMapping("isNameUnique")
+    public ResponseEntity<Boolean> isNameUnique(@RequestParam String newName) {
+        return ResponseEntity.ok(userRepository.findByName(newName).isEmpty());
     }
 }

@@ -10,6 +10,8 @@ import MapKit
 import CoreLocation
 
 class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+    
+    var router: BaseRouter?
 
     private var mapView: MKMapView!
     private var locationManager: CLLocationManager!
@@ -47,6 +49,31 @@ class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         loadStoredLocations()
         // Send new locations to server each minute
         startSendingLocationToServer()
+        
+        addOptionButton()
+    }
+    
+    func addOptionButton() {
+        let optionButton = UIButton(type: .system)
+        optionButton.setTitle("⚙️", for: .normal)
+        optionButton.backgroundColor = .white
+        optionButton.layer.cornerRadius = 5
+        optionButton.addTarget(self, action: #selector(optionButtonTapped), for: .touchUpInside)
+
+        // Position the button in the top-right corner
+        optionButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(optionButton)
+
+        NSLayoutConstraint.activate([
+            optionButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            optionButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10),
+            optionButton.widthAnchor.constraint(equalToConstant: 40),
+            optionButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+    @objc func optionButtonTapped() {
+        router?.navigate(route: Routes.settings)
     }
 
     func loadStoredLocations() -> Void {
@@ -122,10 +149,13 @@ class MapView: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 }
 
 struct MapRepresentable: UIViewControllerRepresentable {
+    @EnvironmentObject var router: BaseRouter
     @Binding var locations: [[UserLocation]]
     
     func makeUIViewController(context: Context) -> MapView {
-        return MapView(locations: self.locations)
+        let mapView = MapView(locations: self.locations)
+        mapView.router = self.router
+        return mapView
     }
     
     func updateUIViewController(_ uiViewController: MapView, context: Context) {

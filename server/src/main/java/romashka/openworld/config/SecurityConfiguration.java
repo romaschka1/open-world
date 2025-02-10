@@ -30,10 +30,15 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/authorization/login", "/api/authorization/register", "/api/authorization/refresh")
+                .requestMatchers(
+                    "/api/authorization/login",
+                    "/api/authorization/register",
+                    "/api/authorization/refresh",
+                    "/api/authorization/isNameUnique"
+                )
                 .permitAll()
                 .anyRequest()
                 .authenticated()

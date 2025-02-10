@@ -18,6 +18,13 @@ struct RegistrationView: View {
     
     @State private var isEmojiPickerVisible: Bool = false
     let emojis = ["😀", "😎", "🤩", "🥳", "😍", "🤔", "🙃", "😴", "🥺", "😡", "🚀", "🌈", "🍕", "🎉", "❤️", "🔥"]
+    
+    func isRegisterButtonEnabled() -> Bool {
+        return viewModel.isNameValid &&
+            !viewModel.isCheckingUsername &&
+            viewModel.emoji.count > 0 &&
+            !viewModel.password.isEmpty
+    }
 
     var body: some View {
         VStack {
@@ -46,7 +53,7 @@ struct RegistrationView: View {
                }
             }
             .padding()
-           
+
             if isEmojiPickerVisible {
                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5), spacing: 10) {
                    ForEach(emojis, id: \.self) { emoji in
@@ -81,15 +88,26 @@ struct RegistrationView: View {
                     }
                 }
             }) {
-                Text("Register")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .cornerRadius(8)
-                    .padding()
+                HStack {
+                    Text("Register")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    
+                    if viewModel.isCheckingUsername {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            .scaleEffect(0.8)
+                    }
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
             }
+            .frame(maxWidth: .infinity)
+            .background(Color.blue)
+            .cornerRadius(8)
+            .padding()
+            .disabled(!self.isRegisterButtonEnabled())
+            .opacity(self.isRegisterButtonEnabled() ? 1 : 0.5)
             
             Button(action: {router.navigate(route: Routes.login)}) {
                Text("Already have an account? Login")
@@ -103,10 +121,45 @@ struct RegistrationView: View {
 }
 
 class RegistrationViewModel: ObservableObject {
-    @Published var name = ""
+    @Published var name: String = "" {
+        didSet {
+            isNameValid = false
+            debounceUsernameCheck()
+        }
+    }
+    @Published var isNameValid: Bool = false
+    @Published var isCheckingUsername: Bool = false
+    
     @Published var emoji = ""
     @Published var password = ""
+    
+    private var usernameCheckTimer: Timer?
 
+    private func debounceUsernameCheck() {
+        if (self.name == "") {
+            return
+        }
+  
+        self.isCheckingUsername = true
+        // Refresh timer
+        usernameCheckTimer?.invalidate()
+        usernameCheckTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+            AuthorizationResource.shared.isNameUnique(self.name) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let value):
+                        self.isNameValid = value
+                        self.isCheckingUsername = false
+                    case .failure(let error):
+                        self.isNameValid = false
+                        self.isCheckingUsername = false
+                        print("Error when validating name: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+    }
+    
     private var cancellables = Set<AnyCancellable>()
 
     func registration(completion: @escaping (Result<AuthorizationTokens, Error>) -> Void) {
