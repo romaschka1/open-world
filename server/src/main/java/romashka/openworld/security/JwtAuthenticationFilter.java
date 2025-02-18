@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import romashka.openworld.domain.UserTokenClaimsEnum;
 import romashka.openworld.security.util.JwtUtil;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String jwtToken = header.substring(7); // Remove Bearer prefix
 
         if (jwtUtil.validateToken(jwtToken)) {
-            String userId = jwtUtil.extractUserId(jwtToken);
+            String userId = jwtUtil.extractClaim(jwtToken, UserTokenClaimsEnum.id);
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(userId, null, new ArrayList<>());
 

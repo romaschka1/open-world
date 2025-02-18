@@ -8,6 +8,7 @@ import java.util.Date;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import romashka.openworld.domain.User;
+import romashka.openworld.domain.UserTokenClaimsEnum;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
@@ -23,12 +24,13 @@ public class JwtUtil {
         return new SecretKeySpec(SECRET_KEY.getBytes(), SignatureAlgorithm.HS256.getJcaName());
     }
 
-    public String extractUserId(String token) {
+    public String extractClaim(String token, UserTokenClaimsEnum claim) {
         // ToDo: put id inside the subject, and extract it here
-        return extractClaim(token, claims -> claims.get("id", String.class));
+        return extractAllClaims(token, claims -> claims.get(claim.name(), String.class));
     }
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+
+    private <T> T extractAllClaims(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }

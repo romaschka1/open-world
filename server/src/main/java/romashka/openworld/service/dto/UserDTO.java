@@ -7,8 +7,9 @@ import lombok.Setter;
 @Data
 @Setter
 @Getter
+@Builder
 public class UserDTO {
-    public String name;
-    public String password;
-    public String emoji;
+  private String name;
+  private String emoji;
+  private String password;
 }
