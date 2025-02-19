@@ -19,7 +19,7 @@ class UserLocationResource {
     }
 
     func getLocations(_ userId: Int, completion: @escaping (Result<[[UserLocation]], Error>) -> Void) {
-       var urlComponents = URLComponents(string: API.baseURL + "location")!
+       var urlComponents = URLComponents(string: API.baseURL + "locations")!
        
        urlComponents.queryItems = [
            URLQueryItem(name: "userId", value: String(userId))
@@ -59,7 +59,7 @@ class UserLocationResource {
     }
     
     func sendLocations(_ locations: [UserLocation], completion: @escaping (Bool) -> Void) {
-        var urlComponents = URLComponents(string: API.baseURL + "location")!
+        var urlComponents = URLComponents(string: API.baseURL + "locations")!
         guard let userId = getLoggedUser()?.id else { return }
 
         urlComponents.queryItems = [URLQueryItem(name: "userId", value: String(userId))]

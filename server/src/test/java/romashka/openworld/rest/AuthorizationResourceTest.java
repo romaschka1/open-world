@@ -2,19 +2,18 @@ package romashka.openworld.rest;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import romashka.openworld.TestDataUtil;
 import romashka.openworld.domain.User;
 import romashka.openworld.domain.UserTokenClaimsEnum;
 import romashka.openworld.repository.UserRepository;
@@ -44,25 +43,11 @@ public class AuthorizationResourceTest {
   @Autowired
   private ObjectMapper objectMapper;
 
+  @Autowired
+  private TestDataUtil testDataUtil;
+
   @MockBean
   private UserRepository userRepository;
-
-  private Argon2PasswordEncoder encoder;
-
-  @BeforeEach
-  void setUp() {
-    encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
-  }
-
-  User createMockedUser() {
-    User mockedUser = new User();
-    mockedUser.setId(1L);
-    mockedUser.setName("Roman");
-    mockedUser.setEmoji("😊");
-    mockedUser.setPassword(encoder.encode("password"));
-
-    return mockedUser;
-  }
 
   UserLoginPayload createLoginPayload() {
     UserLoginPayload payload = UserLoginPayload.builder()
@@ -86,7 +71,7 @@ public class AuthorizationResourceTest {
   @Test
   void shouldLoginUser() throws Exception {
     UserLoginPayload payload = createLoginPayload();
-    User mockedUser = createMockedUser();
+    User mockedUser = testDataUtil.createMockedUser();
 
     when(userRepository.findByName(mockedUser.getName())).thenReturn(Optional.of(mockedUser));
 
@@ -109,7 +94,7 @@ public class AuthorizationResourceTest {
     UserLoginPayload payload = createLoginPayload();
     payload.setName("NotExistingUser");
 
-    User mockedUser = createMockedUser();
+    User mockedUser = testDataUtil.createMockedUser();
 
     when(userRepository.findByName(mockedUser.getName())).thenReturn(Optional.of(mockedUser));
 
@@ -125,7 +110,7 @@ public class AuthorizationResourceTest {
     UserLoginPayload payload = createLoginPayload();
     payload.setPassword("invalidPassword");
 
-    User mockedUser = createMockedUser();
+    User mockedUser = testDataUtil.createMockedUser();
 
     when(userRepository.findByName(mockedUser.getName())).thenReturn(Optional.of(mockedUser));
 
@@ -158,8 +143,8 @@ public class AuthorizationResourceTest {
 
   @Test
   void shouldThrowErrorOnRegistrationWithDuplicatedUserName() throws Exception {
-    User mockedUser = createMockedUser();
-    when(userRepository.findByName("Roman")).thenReturn(Optional.of(mockedUser));
+    User mockedUser = testDataUtil.createMockedUser();
+    when(userRepository.findByName(mockedUser.getName())).thenReturn(Optional.of(mockedUser));
 
     UserRegisterPayload payload = createRegisterPayload();
 
@@ -172,7 +157,7 @@ public class AuthorizationResourceTest {
 
   @Test
   void shouldRefreshToken() throws Exception {
-    User mockedUser = createMockedUser();
+    User mockedUser = testDataUtil.createMockedUser();
     AuthorizationTokens tokens = AuthorizationTokens.builder()
       .accessToken(jwtUtil.generateAccessToken(mockedUser))
       .refreshToken(jwtUtil.generateRefreshToken(mockedUser))
@@ -198,7 +183,7 @@ public class AuthorizationResourceTest {
 
   @Test
   void shouldThrowErrorOnRefreshingTokenWithInvalidRefreshToken() throws Exception {
-    User mockedUser = createMockedUser();
+    User mockedUser = testDataUtil.createMockedUser();
     AuthorizationTokens tokens = AuthorizationTokens.builder()
       .accessToken(jwtUtil.generateAccessToken(mockedUser))
       .refreshToken(jwtUtil.generateRefreshToken(mockedUser) + "make it invalid")
@@ -215,7 +200,7 @@ public class AuthorizationResourceTest {
 
   @Test
   void shouldThrowErrorOnRefreshingTokenWithInvalidTokenData() throws Exception {
-    User mockedUser = createMockedUser();
+    User mockedUser = testDataUtil.createMockedUser();
 
     AuthorizationTokens tokens = AuthorizationTokens.builder()
       .accessToken(jwtUtil.generateAccessToken(mockedUser))
@@ -233,7 +218,7 @@ public class AuthorizationResourceTest {
 
   @Test
   void shouldCheckIfNameIsUnique() throws Exception {
-    User mockedUser = createMockedUser();
+    User mockedUser = testDataUtil.createMockedUser();
 
     when(userRepository.findByName(mockedUser.getName())).thenReturn(Optional.of(mockedUser));
 

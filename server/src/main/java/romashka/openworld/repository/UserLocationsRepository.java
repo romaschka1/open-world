@@ -7,7 +7,7 @@ import romashka.openworld.domain.UserLocation;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserLocationRepository extends JpaRepository<UserLocation, Long>, JpaSpecificationExecutor<UserLocation> {
-    UserLocation findTopByOrderByIdDesc();
-    Optional<List<UserLocation>> findByUserId(Long userId);
+public interface UserLocationsRepository extends JpaRepository<UserLocation, Long>, JpaSpecificationExecutor<UserLocation> {
+  UserLocation findTopByOrderByIdDesc();
+  Optional<List<UserLocation>> findByUserId(Long userId);
 }
